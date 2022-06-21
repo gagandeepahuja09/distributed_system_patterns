@@ -21,4 +21,13 @@
 
 * Fortunately, using containers and container orchestrators we can establish a collection of patterns and reusable components.
 
-**A Brief History of Patterns in Software Development**
+**Why do we need patterns, practices and components**
+
+*Standing on the shoulder of the giants*
+    * Learning from others experiences and figuring out the best possible ways of doing something.
+
+*A Shared Language For Discussing Our Practice*
+    * We no longer have to spend time defining the pattern and what it does. We can instead jump on how the pattern can be used to solve the current problem.
+
+*Shared components for easy reuse*
+    * Patterns provide the ability 
