@@ -1,0 +1,1 @@
+* Single-node pattern made up of 2 containers ==> application container and sidecar container.
