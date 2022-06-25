@@ -1,0 +1,31 @@
+# Stage 1: Build
+FROM golang:1.11-alpine
+
+# Install Node and NPM
+RUN apk update && apk updgrade && apk add --no-cache git nodejs bash npm 
+
+# Get dependencies for go part of build
+RUN go get -u github.com/...
+RUN go get github.com/tools/godep
+
+WORKDIR /go/src/github.com/project-name
+
+# Copy all sources in
+COPY . .
+
+# This is a set of variables that the build script expects
+ENV VERBOSE=0
+ENV PKG=github.com/project-name
+ENV ARCH=amd64
+ENV VERSION=test
+
+# Do the build. This script is part of incoming sources.
+RUN build/build.sh
+
+# Stage 2: Deployment
+FROM alpine
+
+USER nobody:nobody
+COPY --from=build /go/bin/project-name/project-name
+
+CMD [ "/project-name"]

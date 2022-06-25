@@ -26,3 +26,31 @@
 
 * System containers seek to mimic virtual machines and often run a full boot process. They are now seen as a poor practice and application containers have gained favor.
 * Application containers differ from system containers in the fact that they commonly run a single program. Running a single program per container provides the level of granularity required for composing scalable applications and is a design philosophy that is leveraged heavily by Pods.
+
+**Building Application Images With Docker**
+
+**Dockerfiles**
+* Can be used to automate the creation of a docker container image. It is the recipe for how to build the container image.
+* Check the node example
+* npm install --save express
+* docker build -t simple-node .
+* docker run --rm -p 3011:3011 simple-node.
+
+**Optimizing Image Sizes**
+1. Files that are removed by subsequent layers in the system are actually still present in the images; they are just inaccessible.
+2. Image caching and building: Every time you change a layer, it changes every layer that comes after it.
+Hence the layers should be ordered from least likely to change to most likely to change. Hence better to install dependencies first in the layer before adding the source code file. A dev is going to update code much more often than updating the dependencies. 
+
+**Image Security**
+* Don't build containers with password baked in. Secrets and images should never be mixed.
+* Deleting a file in one layer doesn't delete that file from preceding layers. It can be accessed by anyone with the right tools.
+
+**Multistage Image Builds**
+* One of the most common ways to accidentally build large images is to do the actual program compilation as part of the construction of the application container image.
+* It leaves all of the unnecessary development tools lying around inside of your image and slows down the development.
+
+* To resolve this problem, docker introduced multistage builds. Through this, a dockerfile can produce multiple images where each image is considered as a stage.
+
+* Hands on example:
+    * The single stage Dockerfile produces a container image containing the static executable but it also includes all the Go, React development tools and the source code of the application. None of this is needed in the final application. 
+    * In multistage build, the build image contains all of of the above files but the deployment image only contains the executable file. This reduces the final container image size by 100s of MBs and dramatically speeds up deployment times.
