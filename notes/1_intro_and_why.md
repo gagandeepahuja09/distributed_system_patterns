@@ -14,7 +14,8 @@
     * Immutability
     * Declarative Configuration
     * Online self-healing systems
-* **Immutability**
+
+**Immutability**
     * apt-get update ==> Update to a mutable system.
     * In a mutable system, it is highly likely that the incremental updates are done by many different people and in many cases, won't be recorded properly.
     * In an immutable system, rather than a series of updates, an entirely new, complete image is built.
@@ -41,3 +42,9 @@
 
 * More advanced form of self healing: *Operator* paradigm of kubernetes.
     * More advanced logic need to maintain, scale and heal a specific piece of software is encoded into an operator application that runs as a container in the cluster.
+
+*************************************************************************************
+
+**Scaling Your Service And Your Teams**
+
+* Kubernetes acheives scalability by favoring decoupled architectures. 
