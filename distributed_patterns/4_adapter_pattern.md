@@ -36,4 +36,11 @@
 
 * Why not modify the application container itself?
     * Container can be a third-party one. In that case, deriving a slightly modified image that we have to maintain (patch, rebase, etc) is significantly more expensive than developing an adapter container that run alongside party's image.
-    * Other usecase: reuse and alternative solution if enforcing a practice throughout is difficult(which generally is). 
+    * Other usecase: reuse and alternative solution if enforcing a practice throughout is difficult(which generally is).
+
+**Hands On: Normalizing different logging formats with fluentd**
+* Fluentd decouple data sources from backend systems by providing a common layer in between.
+* It has a rich set of community supported plugins.
+* Redis SLOWLOG command is only available to be executed on the redis server.
+* We can use fluentd and the adapter pattern to solve this problem.
+* Fluentd plugin to listen to slow queries: https://github.com/mominosin/fluent-plugin-redis-slowlog 
