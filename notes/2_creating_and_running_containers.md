@@ -54,3 +54,14 @@ Hence the layers should be ordered from least likely to change to most likely to
 * Hands on example:
     * The single stage Dockerfile produces a container image containing the static executable but it also includes all the Go, React development tools and the source code of the application. None of this is needed in the final application. 
     * In multistage build, the build image contains all of of the above files but the deployment image only contains the executable file. This reduces the final container image size by 100s of MBs and dramatically speeds up deployment times.
+* docker build -t project-name .
+* docker run --rm -p 8080:8080 project-name
+
+**Storing Images in A Remote Registry**
+* What good is a container image if it's only available on a single machine.
+
+* Kubernetes relies on the fact that images described in a pod manifest are available across every machine in the cluster.
+
+* Remote registry can be private(aws/azure/gcr[google container registry]) or public(dockerhub)
+
+* docker tag project-name gcr.io/project-name-demo/project-name-amd64:v1
