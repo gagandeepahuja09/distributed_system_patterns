@@ -74,4 +74,23 @@
 * Routes network traffic to load-balanced services in the kubernetes cluster.
 * To do its job, the proxy must be present on every node in the cluster.
 * K8s has an API object named DaemonSet that is used in many clusters to accomplish this.
+* **kubectl get pods -n kube-system**
 * **kubectl get daemonSets -n kube-system kube-proxy**
+
+**Kubernetes DNS**
+* Kubernetes also runs a DNS server.
+* It provides naming and discovery for the services that are defined in the cluster.
+* The DNS server also runs as a replicated service in the cluster. The DNS service is run as a kubernetes deployment which manages these replicas.
+* **kubectl get deployments -n kube-system**
+
+* There is also a K8s service that performs load balancing for the DNS server.
+* **kubectl get services -n kube-system**
+
+**Kubernetes UI**
+* The UI is run as a single replica but it is still managed by a Kubernetes deployment for reliability and upgrades.
+* **kubectl get deployments -n kube-system kubernetes-dashboard**
+* The dashboard also has a service that performs load balancing for the dashboard.
+* **kubectl get services -n kube-system kubernetes-dashboard**
+
+* We can use kubectl proxy to access this UI.
+    * http://localhost:8001/api/v1/namespaces/kube-system/services
