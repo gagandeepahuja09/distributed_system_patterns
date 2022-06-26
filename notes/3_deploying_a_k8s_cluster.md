@@ -54,3 +54,24 @@
 * *etcd*
     * Etcd server is the storage of the cluster where all API objects are stored.
     
+**Listing Nodes in A Cluster**
+* **kubectl get nodes**
+* In Kubernetes, nodes are separated into:
+    * *Master nodes*: They contain containers like the API server, scheduler, etc which manage the cluster.
+    * *Worker nodes*: Nodes where our containers will run.
+* Kubernetes won't generally schedule work on master nodes to ensure that user workload don't harm the overall operation of the cluster. 
+* **kubectl describe nodes docker-desktop**
+* Non-terminated Pods:  etcd, controller-manager, scheduler, apiserver.
+* We can see the pods on the node, the CPU and memory that each pod is requesting from the node, as well as the total resources requested.
+* Kubernetes tracks both the requests and upper limits for resources for each pod that runs on a machine.
+
+**Cluster Components**
+* One of the interesting aspects of kubernetes is that many of the components that make up the kubernetes cluster are deployed using kubernetes itself.
+* All of these components run in the kube-system namespace.
+* Namespace: An entity for organizing kubernetes resources. You can think of it like a folder in a filesystem.
+
+**Kubernetes Proxy**
+* Routes network traffic to load-balanced services in the kubernetes cluster.
+* To do its job, the proxy must be present on every node in the cluster.
+* K8s has an API object named DaemonSet that is used in many clusters to accomplish this.
+* **kubectl get daemonSets -n kube-system kube-proxy**
