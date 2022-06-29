@@ -65,3 +65,30 @@
         -o jsonpath='{.items[0].metadata.name}')
     $ kubectl port-forward $ALPACA_PROD 48858:8080
 `
+
+**Service DNS**
+* Because the cluster IP is virtual, it is stable and hence appropriate to give it a DNS address.
+* All of the issues arounds the client caching DNS no longer apply.
+* Within a namespace, it is as easy as just using the service name to connect to one of the pods identified by a service.
+
+* Kubernetes provides a DNS service exposed to pods running in the cluster.
+    * This kubernetes service was installed as a system component when the cluster was first created.
+    * This DNS service is managed by Kubernetes and a great example of kubernetes building on kubernetes.
+    * It provides DNS names for cluster IPs.
+...
+
+**Readiness Checks**
+
+**Looking Beyond The Cluster**
+* Acheived by NodePorts to allow traffic outside of a cluster.
+* $ kubectl edit service alpaca-prod
+    * Change the spec.type field to NodePort.
+    * We can also do this during service creation: kubectl expose --type=NodePort
+* If we are sitting on the same network, we can access it directly. If the cluster is in cloud, we can use SSH tunneling:
+    ssh <node> -L 8080:localhost:30005
+    * 30005 is the NodePort.
+
+**Advanced Details**
+* Kubernetes is build to be an extensible system.
+    * There are layers that allow for more advanced integrations.
+* Understanding the details of how services is implemented will help us both troubleshoot and create more advanced integrations.
