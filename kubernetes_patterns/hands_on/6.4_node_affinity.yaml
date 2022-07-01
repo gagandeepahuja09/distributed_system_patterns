@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: random-generator
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: numberCores
+            operator: Gt
+            values: [ "3" ]
+      prefferedDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchFields:
+          - key: metadata.name
+            operator: NotIn
+            values: [ "master" ]
+  containers:
+  - image: k8spatterns/random-generator:1.0
+    name: random-generator
