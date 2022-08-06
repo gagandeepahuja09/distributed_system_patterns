@@ -20,4 +20,7 @@
 **Data Decomposition Concerns**
 
 **Performance**
-* Database joins won't be possible.
+* Database joins won't be possible. Joins move from database tier to application tier.
+
+**Data Integrity**
+* Foreign key integrity ensures that we are able to .
